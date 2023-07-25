@@ -1,4 +1,5 @@
 using API.Data;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 builder.Services.AddCors();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -48,7 +51,7 @@ try
 }
 catch (Exception ex)
 {
-    logger.LogError(ex, "A problem occured duing migration");
+    logger.LogError(ex, "A problem occured during migration");
 }
 
 app.Run();
