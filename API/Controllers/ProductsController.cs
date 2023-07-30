@@ -14,9 +14,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            return Ok(await _context.Products.ToListAsync());
         }
 
         [HttpGet("{id}")]
